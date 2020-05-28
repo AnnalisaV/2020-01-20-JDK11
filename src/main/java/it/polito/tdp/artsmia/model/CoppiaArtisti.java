@@ -1,10 +1,10 @@
 package it.polito.tdp.artsmia.model;
 
-public class CoppiaArtisti {
+public class CoppiaArtisti implements Comparable<CoppiaArtisti>{
 
 	private int id1; //id del primo artista
 	private int id2; 
-	private int peso;
+	private Integer peso;
 	
 	
 	/**
@@ -47,6 +47,14 @@ public class CoppiaArtisti {
 
 	public void setPeso(int peso) {
 		this.peso = peso;
+	}
+
+
+	//decrescente di peso
+	@Override
+	public int compareTo(CoppiaArtisti other) {
+		// TODO Auto-generated method stub
+		return -this.peso.compareTo(other.peso);
 	} 
 	
 	

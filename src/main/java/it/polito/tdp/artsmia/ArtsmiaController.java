@@ -1,8 +1,11 @@
 package it.polito.tdp.artsmia;
 
 import java.net.URL;
+import java.util.Collections;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.artsmia.model.CoppiaArtisti;
 import it.polito.tdp.artsmia.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,6 +46,18 @@ public class ArtsmiaController {
     void doArtistiConnessi(ActionEvent event) {
     	txtResult.clear();
     	txtResult.appendText("Calcola artisti connessi");
+    	
+    	List<CoppiaArtisti> coppie= this.model.getCoppie(); 
+    	
+    	if(coppie==null) {
+    		txtResult.appendText("ERRORE, va creato prima il grafo!\n");
+    		return; 
+    	}
+    	 //ci sono
+    	Collections.sort(coppie);
+    	for (CoppiaArtisti c : coppie) {
+    		txtResult.appendText(String.format("(%d, %d) = %d\n",c.getId1(),c.getId2(),c.getPeso()));
+    	}
     }
 
     @FXML

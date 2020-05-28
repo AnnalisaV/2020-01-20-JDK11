@@ -48,7 +48,7 @@ public class Model {
 			
 		}
 		
-		System.out.println("Grafo creato! Vertici"+this.graph.vertexSet().size()+" archi "+this.graph.edgeSet().size()+"\n");
+		System.out.println("Grafo creato! Vertici "+this.graph.vertexSet().size()+" archi "+this.graph.edgeSet().size()+"\n");
 		
 		}
 
@@ -58,5 +58,9 @@ public class Model {
 	
 	public int getNArchi() {
 		return this.graph.edgeSet().size(); 
+	}
+	
+	public List<CoppiaArtisti> getCoppie(){
+		return this.coppie; 
 	}
 }
