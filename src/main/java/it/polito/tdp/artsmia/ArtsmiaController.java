@@ -64,6 +64,27 @@ public class ArtsmiaController {
     void doCalcolaPercorso(ActionEvent event) {
     	txtResult.clear();
     	txtResult.appendText("Calcola percorso");
+    	Integer id; 
+    	try {
+    	  id= Integer.parseInt(this.txtArtista.getText()); 
+    	}
+    	catch(NumberFormatException ne) {
+    		txtResult.appendText("ERRORE Inserire un id nel formato corretto\n");
+    		return; 
+    		
+    	}
+    	
+    	if(!this.model.contiene(id)) {
+    		txtResult.appendText("Artista non presente nel grafo!! \n");
+    		return; 
+    		}
+    	
+    	List<Integer> percorso= this.model.trovaPercorso(id); 
+    	txtResult.appendText("Percorso piu' lungo : "+percorso.size()+" vertici \n \n");
+    	for(Integer i : percorso) {
+    		txtResult.appendText(i+"\n");
+    	}
+    	
     }
 
     @FXML
@@ -80,11 +101,14 @@ public class ArtsmiaController {
     	
     	this.model.creaGrafo(ruolo);
     	txtResult.appendText(String.format("Grafo creato con %d vertici e %d archi", this.model.getNVertex(), this.model.getNArchi()));
+    
+    	this.btnCalcolaPercorso.setDisable(false); // abilito il calcolo del percorso post creazione del grafo
     }
 
     public void setModel(Model model) {
     	this.model = model;
     	this.boxRuolo.getItems().addAll(this.model.getRuoli()); 
+    	this.btnCalcolaPercorso.setDisable(true); // lo disabilito finche' non si crea il grafo 
     }
 
     
